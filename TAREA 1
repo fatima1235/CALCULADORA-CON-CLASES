@@ -1,0 +1,304 @@
+//PRINCIPIO DEL PROGRAMA
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace Calculadora
+{
+    class Program
+    {
+        static Operaciones opera = new Operaciones();
+        static menu m = new menu();
+        static void Main(string[] args)
+        {
+            int opciones = 0;
+            while (opciones != 7)
+            {
+                opciones = m.ListaMenu();
+                if (opciones == 1)
+                {
+                    Console.WriteLine(opera.Resultado('s'));
+                }
+                else if (opciones == 2)
+                {
+                    Console.WriteLine(opera.Resultado('r'));
+                }
+                else if (opciones == 3)
+                {
+                    Console.WriteLine(opera.Resultado('m'));
+                }
+                else if (opciones == 4)
+                {
+                    Console.WriteLine(opera.Resultado('d'));
+                }
+                else if (opciones == 5)
+                {
+                    Console.WriteLine(opera.Resultado('z'));
+                }
+                 else if (opciones == 6)
+                {
+                    Console.WriteLine(opera.Resultado('p'));
+                }
+                else if (opciones == 7)
+                {
+                    Console.Clear();
+                }
+
+            }
+            Console.ReadKey();
+        }
+    }
+} 
+
+//CLASE 1
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class menu
+    {
+     
+        private int op = 0;
+        public int ListaMenu()
+        {
+            Console.WriteLine("1.- Suma");
+            Console.WriteLine("2.- Resta");
+            Console.WriteLine("3.- Multiplicación");
+            Console.WriteLine("4.- Division");
+            Console.WriteLine("5.- Radicación");
+            Console.WriteLine("6.- Potenciación");
+            Console.WriteLine("7.- Salir");
+            Console.Write("Ingrese el numero de la opcion que desee: ");
+            op = int.Parse(Console.ReadLine());
+            return op;
+        } 
+    }
+}
+
+
+//CLASE 2
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Operaciones
+    {
+        public Suma sum = new Suma();
+        public Resta rest = new Resta();
+        public Multiplicacion mult = new Multiplicacion();
+        public Division div = new Division();
+        public Radicacion rad = new Radicacion();
+        public Potenciacion pot = new Potenciacion();
+        public double n = 0; 
+        public string Resultado(char t) 
+        { 
+            double total = 0;
+            
+            int j = 0;
+            int k = 0;
+            int x = 0;
+            int y = 0;
+            char op = 's';
+            while (op!='n') 
+            { 
+                if (t == 's') 
+                { 
+                    total = sum.suma(total, Pedir()); 
+                } 
+                else if (t=='r') 
+                {
+                    
+                        if (j == 0)
+                        {
+                            total = Pedir();
+                            j++;
+                        }
+                        else
+                        {
+
+                            total = rest.resta(total, Pedir());
+                        }
+                    }
+                
+                else if (t == 'm')
+                {
+                    if (k == 0)
+                    {
+                        total = Pedir();
+                        k++;
+                    }
+                    else
+                    {
+                        total = mult.multiplicacion(total, Pedir());
+                    }
+                }
+                else if (t == 'd')
+                {
+                    if (y == 0)
+                    {
+                        total = Pedir();
+                        y++;
+                    }
+                    else
+                    {
+                        total = div.division(total, Pedir());
+                    }
+                }
+                else if (t == 'z')
+                {
+                    total = rad.radicacion(Pedir());
+                }
+                else if(t == 'p')
+                {
+                    if (x == 0)
+                    {
+                        total = Pedir();
+                        x++;
+                    }
+                    else
+                    {
+                        total = pot.potenciacion(total, Pedir());
+                    }
+                }
+                
+                Console.Write("Desea ingresar otro valor [s/n] "); 
+                op = char.Parse(Console.ReadLine()); 
+            } 
+            return("El resultado es: "+total); 
+            } 
+            private double Pedir() 
+            { 
+            double valor = 0; 
+            bool estado = false; 
+            while (estado == false) 
+            { 
+                Console.Write("Ingrese un valor: "); 
+                try 
+                { 
+                    valor = double.Parse(Console.ReadLine()); 
+                    estado = true; 
+                } 
+                catch 
+                { 
+                    Console.WriteLine("Ingrese valores numericos..."); 
+                } 
+            } 
+            return valor; 
+        } 
+    }
+}
+
+
+//CLASE 3
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Suma
+    {
+        public double suma(double a, double b)
+        {
+            return (a + b);
+        }
+    }
+}
+
+
+
+//CLASE 4
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Resta
+    {
+        public double resta(double a, double b)
+        {
+            return (a - b);
+        }
+    }
+}
+
+
+
+//CLASE 5
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Multiplicacion
+    {
+       
+        public double multiplicacion(double a, double b)
+        {
+            return (a * b);
+        }
+    }
+}
+
+
+
+//CLASE 6
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Division
+    {
+        public double division(double a, double b)
+        {
+            return (a / b);
+        }
+    }
+}
+
+
+
+//CLASE 7
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Radicacion
+    {
+        public double radicacion(double a)
+        {
+            double radicar = 0;
+            radicar = Math.Sqrt(a);
+            return radicar;
+        }
+    }
+}
+
+
+
+
+//CLASE 8
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Calculadora
+{
+    class Potenciacion
+    {
+        public double potenciacion( double a, double b)
+        {
+            double potencia = 0;
+            potencia = Math.Pow(a, b);
+            return potencia;
+        }
+    }
+}
